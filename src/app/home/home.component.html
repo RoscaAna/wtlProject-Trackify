@@ -1,0 +1,36 @@
+<div class="home-container">
+    <div class="carousel">
+      <h1 *ngFor="let greeting of greetings; let i = index"
+          [ngClass]="{'active': i === currentIndex}">
+        {{ greeting }}
+      </h1>
+    </div>      
+  
+    <div class="about-section">
+      <div class="about-header">
+        <h2>Discover the World of Music with <span>Trackify</span></h2>
+        <p>Trackify is your go-to platform to organize, rate, and enjoy your music collection effortlessly.</p>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <p>With Trackify, you can:</p>
+          <ul>
+            <li><span class="icon">🎵</span> Organize your music by artist, genre, and year</li>
+            <li><span class="icon">⭐</span> Rate your favorite tracks and discover new favorites</li>
+            <li><span class="icon">💿</span> Keep track of your music collection effortlessly</li>
+          </ul>
+        </div>
+        <div class="about-image">
+          <img src="assets/images/music-record.png" alt="Music collection" />
+        </div>
+      </div>
+      <p class="about-footer">Join the Trackify community and enhance your music experience today!</p>
+    </div>    
+  
+    <div class="album-carousel">
+      <div class="carousel-track">
+        <img *ngFor="let album of albums" [src]="album" alt="Album Cover" class="album-cover">
+      </div>
+    </div>  
+  </div>
+  

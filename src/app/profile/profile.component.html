@@ -1,0 +1,21 @@
+<div class="profile">
+  <div class="profile-header">
+    <img src="assets/images/profile.png" alt="User Avatar" class="profile-img">
+    <h1>Welcome, 
+      <span *ngIf="!isEditMode">{{ username }}</span>
+      <input *ngIf="isEditMode" [(ngModel)]="newUsername" class="username-input" />
+      <button *ngIf="!isEditMode" class="edit-btn" (click)="toggleEditMode()">✎</button>
+    </h1>
+  </div>
+
+  <div *ngIf="isEditMode" class="modal-backdrop">
+    <div class="modal">
+      <h2>Edit Username</h2>
+      <input [(ngModel)]="newUsername" placeholder="Enter new username" class="username-input" />
+      <div class="modal-actions">
+        <button (click)="saveUsername()">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">
+      <img src="../../assets/images/logo.png" alt="Logo" class="logo-img" /> Trackify
+    </a>
+  </div>
+
+  <ul class="nav-links" [ngClass]="{'active': isMenuOpen}">
+    <li><a href="/">Home</a></li>
+    <li *ngIf="isLoggedIn"><a href="/my-tracks">My Tracks</a></li>
+    <li *ngIf="!isLoggedIn"><a href="/login">Login</a></li>
+    <li *ngIf="!isLoggedIn"><a href="/register">Register</a></li>
+    <li *ngIf="isLoggedIn"><a href="/profile">Profile</a></li>
+    <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Logout</a></li>
+  </ul>
+</nav>
+ 

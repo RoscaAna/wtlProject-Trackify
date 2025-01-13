@@ -1,0 +1,108 @@
+<div class="tracks-container">
+  <h2>My Tracks</h2>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm.name"
+      (input)="filterTracks()"
+      placeholder="Search by track name"
+    />
+    <input
+      type="text"
+      [(ngModel)]="searchTerm.artist"
+      (input)="filterTracks()"
+      placeholder="Search by artist"
+    />
+    <input
+      type="number"
+      [(ngModel)]="searchTerm.releaseYear"
+      (input)="filterTracks()"
+      placeholder="Search by release year"
+    />
+    <input
+      type="text"
+      [(ngModel)]="searchTerm.genres"
+      (input)="filterTracks()"
+      placeholder="Search by genre"
+    />
+  </div>
+
+  <button (click)="openModal()" class="add-track-btn">Add Track</button>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Artist</th>
+        <th>Year</th>
+        <th>Genres</th>
+        <th>Rating</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let track of filteredTracks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ track.name }}</td>
+        <td>{{ track.artist }}</td>
+        <td>{{ track.releaseYear }}</td>
+        <td>{{ track.genres.join(', ') }}</td>
+        <td>{{ track.rating }} ★</td>
+        <td>
+          <button (click)="openDeleteModal(track, i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal" [ngClass]="{ 'show': isDeleteModalOpen }">
+  <div class="modal-content">
+    <span class="close" (click)="closeDeleteModal()">&times;</span>
+    <h2>Are you sure you want to delete this track?</h2>
+    <div>
+      <button (click)="deleteTrack()">Yes</button>
+      <button (click)="closeDeleteModal()">No</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [ngClass]="{ 'show': isModalOpen }">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>Add a New Track</h2>
+    <form (ngSubmit)="addTrack()">
+      <div>
+        <label for="name">Track Name:</label>
+        <input type="text" id="name" [(ngModel)]="newTrack.name" name="name" required />
+      </div>
+      <div>
+        <label for="artist">Artist:</label>
+        <input type="text" id="artist" [(ngModel)]="newTrack.artist" name="artist" required />
+      </div>
+      <div>
+        <label for="releaseYear">Release Year:</label>
+        <input type="number" id="releaseYear" [(ngModel)]="newTrack.releaseYear" name="releaseYear" required />
+      </div>
+      <div>
+        <label for="genres">Genres (comma-separated):</label>
+        <input type="text" id="genres" [(ngModel)]="newTrack.genres" name="genres" required />
+      </div>
+      <div>
+        <label for="rating">Rating (1-5):</label>
+        <input
+          type="number"
+          id="rating"
+          [(ngModel)]="newTrack.rating"
+          name="rating"
+          min="1"
+          max="5"
+          step="0.1"
+          required
+        />
+      </div>
+      <button type="submit">Add Track</button>
+    </form>
+  </div>
+</div>
